@@ -5,7 +5,7 @@ import java.io.*;
 	How to use it?
 
 	for the server: 'javac TCPServer.java' and 'java TCPServer'
-	for the client: 'javac TCPClient.java' and 'java TCPClient hello 127.0.0.1'
+	for the client: 'javac TCPClient.java' and 'java TCPClient'
  */
 
 public class TCPClient {
@@ -26,9 +26,15 @@ public class TCPClient {
             DataInputStream in = new DataInputStream(s.getInputStream()); //inward connection
             DataOutputStream out = new DataOutputStream( s.getOutputStream()); //outward connection
 
-            out.writeUTF(message);
-            String data = in.readUTF();
-            System.out.println("Received: "+ data);
+            //eseguire un altro thread che stampa in continuazione e vede se ci sno nuovi messaggi
+//                message = in.readUTF(); // it receives the message from the server
+//                System.out.println("Received: " + message);
+
+            while(true) {
+
+                out.writeUTF(message); // it sends the message to the server
+            }
+
         } catch (UnknownHostException e){
             System.out.println("Sock: "+e.getMessage());
         } catch (EOFException e){
