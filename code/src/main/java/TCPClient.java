@@ -11,8 +11,7 @@ import java.util.Scanner;
 
 public class TCPClient {
 
-    public static void main (String args[]) {
-
+    public static void main (String[] args) {
 
         Socket s = null;
 
@@ -23,12 +22,18 @@ public class TCPClient {
 
         try{
             int serverPort = 7896;
+
+            System.out.print("Choose a Nickname: ");
+            String clientName = scan.nextLine();
+
             s = new Socket(host, serverPort);
 
             DataInputStream in = new DataInputStream(s.getInputStream()); //inward connection
             DataOutputStream out = new DataOutputStream( s.getOutputStream()); //outward connection
 
             MessagesInbox inbox = new MessagesInbox(in);
+
+            out.writeUTF(clientName); //First message is clients name
 
             while(true) {
 
@@ -52,6 +57,7 @@ public class TCPClient {
 class MessagesInbox extends Thread {
 
     DataInputStream in;
+
     public MessagesInbox(DataInputStream in) {
         this.in = in;
         this.start();
@@ -64,8 +70,9 @@ class MessagesInbox extends Thread {
                 message = in.readUTF();
             } catch (IOException e) {
                 message = "Error reading message. Info: " + e.getMessage();
+                break;
             }
-            System.out.println("Received: " + message);
+            System.out.println(message);
         }
     }
 

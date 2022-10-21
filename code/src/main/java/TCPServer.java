@@ -5,11 +5,11 @@ import java.util.List;
 
 public class TCPServer {
 
-    public static List<Connection> clientConnected;
+    public static List<Connection> clientsConnected;
 
     public static void main (String args[]) {
 
-        clientConnected = new ArrayList<>();
+        clientsConnected = new ArrayList<Connection>();
 
         try{
 
@@ -20,7 +20,7 @@ public class TCPServer {
                 Socket clientSocket = listenSocket.accept();  // it receives request from the client and accepts it
                 // --> handshake
                 Connection c = new Connection(clientSocket); // it establishes a connection with the client
-                clientConnected.add(c);
+                clientsConnected.add(c);
             }
 
         } catch(IOException e) {System.out.println("Listen: " + e.getMessage());}
@@ -32,6 +32,7 @@ class Connection extends Thread {
     DataInputStream in;
     DataOutputStream out;
     Socket clientSocket;
+    private String clientName;
 
     public Connection (Socket aClientSocket) {
 
@@ -42,24 +43,46 @@ class Connection extends Thread {
             this.start(); // it executes the run()
         }
         catch(IOException e)
-        {System.out.println("Connection: "+e.getMessage());}
+            {System.out.println("Connection: "+e.getMessage());}
 
+    }
+
+    public String getClientName(){
+        if (clientName == null || clientName.isEmpty())
+            throw new IllegalStateException("No nickname set for: " + clientSocket.getInetAddress().toString());
+        else
+            return this.clientName;
+
+    }
+
+    private void broadCast(String message){
+        TCPServer.clientsConnected.forEach((Connection c)-> {
+            try {
+                c.out.writeUTF(getClientName() + ": " + message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void run(){
         try {
-
+            clientName = in.readUTF();
+            broadCast("Hey there, I joined the chat.");
             while(true) {
-
                 String data = in.readUTF();
-
-                for(int i = 0; i < TCPServer.clientConnected.size(); i++) {
-                    TCPServer.clientConnected.get(i).out.writeUTF(data);
+                if (data.equals("/quit")) { //Client want's to disconnect
+                    broadCast(getClientName() + " left the chat.");
+                    clientSocket.close();
+                    TCPServer.clientsConnected.remove(this);
+                    break;
+                } else {
+                    broadCast(data);
                 }
             }
         }
         catch(EOFException e)
-        {System.out.println("EOF: "+e.getMessage());}
+            {System.out.println("EOF: "+e.getMessage());}
         catch(IOException e) {System.out.println("IO:s a"+e.getMessage());
         } finally {
             try {clientSocket.close(); }
