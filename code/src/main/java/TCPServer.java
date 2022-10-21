@@ -57,8 +57,6 @@ class Connection extends Thread {
                     TCPServer.clientConnected.get(i).out.writeUTF(data);
                 }
             }
-//            String data = in.readUTF();  //it reads the data sent from the client
-//            out.writeUTF(data.toUpperCase()); //it transforms the data in uppercase
         }
         catch(EOFException e)
         {System.out.println("EOF: "+e.getMessage());}
