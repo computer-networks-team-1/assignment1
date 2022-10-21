@@ -6,7 +6,7 @@
 - [ ] al client deve esser chiesto il nome  
 - [ ] il server si deve tenere i nomi di tutti i client connessi (magari hashmap con socket?)  
 - [ ] il server salva in un log tutto cio' che succede  
-- [ ] implementare broadcasting system  
+- [X] implementare broadcasting system  
 - [ ] connessione e disconnessione del client devono essere comunicati  
   
 - [ ] documentazione (da vedere divisione)  
