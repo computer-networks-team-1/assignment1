@@ -14,6 +14,13 @@ e dopodichè avviare uno o più client su altri terminali eseguendo
 mvn clean compile exec:java@TCPClient
 ```
 
+Alternativamente è possibile generare i jar eseguendo
+
+```
+mvn clean package
+```
+
+successivamente è possibile trovare i jar all'interno della cartella target
 
 ## Tasks: 
 
