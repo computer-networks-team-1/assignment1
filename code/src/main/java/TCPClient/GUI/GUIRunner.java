@@ -1,5 +1,6 @@
 package TCPClient.GUI;
 
+import TCPClient.GUI.views.MainView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +26,7 @@ public class GUIRunner {
 
         primaryStage.setTitle("TCPClient - Online Chat");
 
-        Scene scene = new Scene(new VBox(), 850, 478);
+        Scene scene = new Scene(new MainView(), 850, 478);
         scene.getStylesheets().add("style.css");
 
         primaryStage.setScene(scene);
