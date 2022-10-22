@@ -1,13 +1,12 @@
-import java.net.*;
-import java.io.*;
+package TCPClient;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
-
-/*
-	How to use it?
-
-	for the server: 'javac TCPServer.java' and 'java TCPServer'
-	for the client: 'javac TCPClient.java' and 'java TCPClient'
- */
 
 public class TCPClient {
 
@@ -31,7 +30,7 @@ public class TCPClient {
             DataInputStream in = new DataInputStream(s.getInputStream()); //inward connection
             DataOutputStream out = new DataOutputStream( s.getOutputStream()); //outward connection
 
-            MessagesInbox inbox = new MessagesInbox(in);
+            MessageInbox inbox = new MessageInbox(in);
 
             out.writeUTF(clientName); //First message is clients name
 
@@ -52,28 +51,4 @@ public class TCPClient {
             try { s.close();
             } catch (IOException e) {/*close failed*/}}
     }
-}
-
-class MessagesInbox extends Thread {
-
-    DataInputStream in;
-
-    public MessagesInbox(DataInputStream in) {
-        this.in = in;
-        this.start();
-    }
-
-    public void run() {
-        while(true) {
-            String message = "";
-            try {
-                message = in.readUTF();
-            } catch (IOException e) {
-                message = "Error reading message. Info: " + e.getMessage();
-                break;
-            }
-            System.out.println(message);
-        }
-    }
-
 }
