@@ -85,6 +85,13 @@
                             <mainClass>TCPClient.TCPClient</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>TCPClientGUI</id>
+                        <configuration>
+                            <executable>maven</executable>
+                            <mainClass>TCPClient.GUI.Main</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
