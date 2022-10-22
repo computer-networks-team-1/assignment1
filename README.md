@@ -14,6 +14,13 @@ e dopodichè avviare uno o più client su altri terminali eseguendo
 mvn clean compile exec:java@TCPClient
 ```
 
+Alternativamente è possibile generare i jar eseguendo
+
+```
+mvn clean package
+```
+
+successivamente è possibile trovare i jar all'interno della cartella target
 
 ## Tasks: 
 
@@ -23,6 +30,7 @@ mvn clean compile exec:java@TCPClient
 - [x] il server salva in un log tutto cio' che succede
 - [x] implementare broadcasting system  
 - [x] connessione e disconnessione del client devono essere comunicati
+- [ ] fixare che /quit fa realmente chiudere il processo
 - [ ] documentazione (da vedere divisione)  
 - [ ] GUI 
 - [ ] emoticon
