@@ -2,14 +2,13 @@ import java.net.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TCPServer {
 
     public static List<Connection> clientsConnected;
 
-    public static void main (String args[]) {
+    public static void main (String args[]) throws IOException, URISyntaxException {
 
         clientsConnected = new ArrayList<Connection>();
 
@@ -35,12 +34,11 @@ class Connection extends Thread {
     DataOutputStream out;
     Socket clientSocket;
     private String clientName;
-    private List<String> messages;
+
 
     public Connection (Socket aClientSocket) {
 
         try {
-            messages = new ArrayList<>();
             clientSocket = aClientSocket;
             in = new DataInputStream(clientSocket.getInputStream()); //inward connection
             out = new DataOutputStream( clientSocket.getOutputStream()); //outward connection
@@ -106,13 +104,12 @@ class Connection extends Thread {
         String textToLog;
 
         if (message.endsWith("left the chat."))
-            textToLog = time + " - " + ipAddress + " --> " + message;
+            textToLog = time +" - " + ipAddress.substring(1) + " --> " + message;
         else
-            textToLog = time + " - " + ipAddress + " --> " + clientName + ": " + message;
-
-        String fileName = "C:\\Users\\Alice\\Desktop\\assignment1-online-chat\\code\\src\\main\\resources\\" + "logServer.txt";
+            textToLog = time + " - " + ipAddress.substring(1) + " --> " + clientName + ": " + message;
 
         try {
+            String fileName = "src\\main\\resources\\logServer.txt";
             File serverFile = new File(fileName);
             if (serverFile.createNewFile()) {
                 System.out.println("File created: " + serverFile.getName());
