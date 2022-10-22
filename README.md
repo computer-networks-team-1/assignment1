@@ -30,6 +30,7 @@ successivamente è possibile trovare i jar all'interno della cartella target
 - [x] il server salva in un log tutto cio' che succede
 - [x] implementare broadcasting system  
 - [x] connessione e disconnessione del client devono essere comunicati
+- [ ] fixare che /quit fa realmente chiudere il processo
 - [ ] documentazione (da vedere divisione)  
 - [ ] GUI 
 - [ ] emoticon
