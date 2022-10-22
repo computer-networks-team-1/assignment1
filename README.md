@@ -1,4 +1,19 @@
-# assignment1
+# Assignment 1 - Online Chat
+
+## Run Commands
+
+Avviare per prima cosa il server eseguendo
+
+```
+mvn clean compile exec:java@TCPServer 
+```
+
+e dopodichè avviare uno o più client su altri terminali eseguendo
+
+```
+mvn clean compile exec:java@TCPClient
+```
+
 
 ## Tasks: 
 
