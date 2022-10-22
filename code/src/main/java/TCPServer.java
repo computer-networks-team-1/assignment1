@@ -1,6 +1,8 @@
 import java.net.*;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TCPServer {
@@ -33,10 +35,12 @@ class Connection extends Thread {
     DataOutputStream out;
     Socket clientSocket;
     private String clientName;
+    private List<String> messages;
 
     public Connection (Socket aClientSocket) {
 
         try {
+            messages = new ArrayList<>();
             clientSocket = aClientSocket;
             in = new DataInputStream(clientSocket.getInputStream()); //inward connection
             out = new DataOutputStream( clientSocket.getOutputStream()); //outward connection
@@ -55,7 +59,8 @@ class Connection extends Thread {
 
     }
 
-    private void broadCast(String message){
+    private void broadCast(String ipAddress, String clientName, String message){
+        recordThisMessage(ipAddress, clientName, message);
         TCPServer.clientsConnected.forEach((Connection c)-> {
             try {
                 c.out.writeUTF(getClientName() + ": " + message);
@@ -68,16 +73,19 @@ class Connection extends Thread {
     public void run(){
         try {
             clientName = in.readUTF();
-            broadCast("Hey there, I joined the chat.");
+
+            String clientSocketIp = clientSocket.getInetAddress().toString();
+            broadCast(clientSocketIp, clientName, "Hey there, I joined the chat.");
+
             while(true) {
                 String data = in.readUTF();
                 if (data.equals("/quit")) { //Client want's to disconnect
-                    broadCast(getClientName() + " left the chat.");
+                    broadCast(clientSocketIp, clientName, getClientName() + " left the chat.");
                     clientSocket.close();
                     TCPServer.clientsConnected.remove(this);
                     break;
                 } else {
-                    broadCast(data);
+                    broadCast(clientSocketIp, clientName, data);
                 }
             }
         }
@@ -88,5 +96,38 @@ class Connection extends Thread {
             try {clientSocket.close(); }
             catch (IOException e) {/*close failed*/}
         }
+    }
+
+
+    public void recordThisMessage(String ipAddress, String clientName, String message)
+    {
+        LocalDateTime now = LocalDateTime.now();
+        String time =now.getHour() + ":" + now.getMinute() + ":" + now.getSecond();
+        String textToLog;
+
+        if (message.endsWith("left the chat."))
+            textToLog = time + " - " + ipAddress + " --> " + message;
+        else
+            textToLog = time + " - " + ipAddress + " --> " + clientName + ": " + message;
+
+        String fileName = "C:\\Users\\Alice\\Desktop\\assignment1-online-chat\\code\\src\\main\\resources\\" + "logServer.txt";
+
+        try {
+            File serverFile = new File(fileName);
+            if (serverFile.createNewFile()) {
+                System.out.println("File created: " + serverFile.getName());
+            } else {
+                System.out.println("File already exists");
+            }
+
+            FileWriter fw = new FileWriter(serverFile, true);
+            fw.append(textToLog);
+            fw.append('\n');
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
