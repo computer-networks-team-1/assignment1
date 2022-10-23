@@ -11,7 +11,7 @@ mvn clean compile exec:java@TCPServer
 e dopodichè avviare uno o più client su altri terminali eseguendo
 
 ```
-mvn clean compile exec:java@TCPClient
+mvn clean compile exec:java@TCPClientGUI
 ```
 
 Alternativamente è possibile generare i jar eseguendo
@@ -34,5 +34,6 @@ successivamente è possibile trovare i jar all'interno della cartella target
 - [ ] mostrare schermata di errore in caso di non riuscita alla connessione
 - [ ] fixare che /quit fa realmente chiudere il processo
 - [ ] documentazione (da vedere divisione)  
-- [ ] GUI 
+- [x] GUI 
+- [ ] documentare un minimo il codice
 - [ ] emoticon
