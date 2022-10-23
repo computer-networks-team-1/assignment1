@@ -19,3 +19,10 @@
     -fx-pref-height: 418px;
     -fx-padding: 20px;
 }
+
+.chat {
+    -fx-pref-width: 810px;
+    -fx-min-height: 368px;
+    -fx-max-height: 368px;
+    -fx-padding: 5px;
+}

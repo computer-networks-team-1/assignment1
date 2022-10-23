@@ -1,7 +1,11 @@
 package TCPClient.GUI;
 
 import TCPClient.GUI.views.MainView;
+import com.sun.tools.javac.Main;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GUIRunner {
+
+    public static MainView mainView;
 
     private GUIRunner() {}
 
@@ -26,7 +34,9 @@ public class GUIRunner {
 
         primaryStage.setTitle("TCPClient - Online Chat");
 
-        Scene scene = new Scene(new MainView(), 850, 478);
+        mainView = new MainView();
+
+        Scene scene = new Scene(mainView, 850, 478);
         scene.getStylesheets().add("style.css");
 
         primaryStage.setScene(scene);
@@ -39,6 +49,7 @@ public class GUIRunner {
         primaryStage.setMaximized(false);
         primaryStage.setFullScreen(false);
         primaryStage.show();
+
     }
 
     /** Stops the GUI and the threads. */

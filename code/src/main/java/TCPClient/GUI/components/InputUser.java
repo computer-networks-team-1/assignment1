@@ -31,8 +31,10 @@ public class InputUser extends HBox {
     private void sendInput(ActionEvent event) {
         Objects.requireNonNull(event);
 
-        if(!input.getText().equals(""))
+        if(!input.getText().equals("")) {
             clientConnection.sendMessage(input.getText());
+            input.setText("");
+        }
     }
 
 }

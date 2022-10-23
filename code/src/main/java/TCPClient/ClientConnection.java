@@ -1,6 +1,5 @@
-package TCPClient.GUI;
+package TCPClient;
 
-import TCPClient.MessageInbox;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,6 +11,7 @@ import java.net.UnknownHostException;
 public class ClientConnection {
 
     private DataOutputStream out;
+    private DataInputStream in;
     private Socket s;
 
     public ClientConnection(String clientName) {
@@ -25,10 +25,10 @@ public class ClientConnection {
 
             s = new Socket(host, serverPort);
 
-            DataInputStream in = new DataInputStream(s.getInputStream()); //inward connection
+            in = new DataInputStream(s.getInputStream()); //inward connection
             out = new DataOutputStream( s.getOutputStream()); //outward connection
-
-            MessageInbox inbox = new MessageInbox(in);
+//
+//            MessageInbox inbox = new MessageInbox(in);
 
             out.writeUTF(clientName); //First message is clients name
 
@@ -49,6 +49,16 @@ public class ClientConnection {
         } catch (IOException e) {
             System.out.println("IO: "+e.getMessage());
         }
+    }
+
+    public String getMessage () {
+        String message = "";
+        try {
+            message = in.readUTF();
+        } catch (IOException e) {
+            System.out.println("IO: "+e.getMessage());
+        }
+        return message;
     }
 
     public void closeCommunication () {
