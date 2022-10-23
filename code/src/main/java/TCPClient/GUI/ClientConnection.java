@@ -13,6 +13,7 @@ public class ClientConnection {
 
     private DataOutputStream out;
     private Socket s;
+
     public ClientConnection(String clientName) {
 
         s = null;
