@@ -1,5 +1,7 @@
 package TCPClient.GUI.views;
 
+import TCPClient.GUI.components.ChatCanvas;
+import TCPClient.GUI.components.InputUser;
 import TCPClient.MessageInbox;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
@@ -66,8 +68,9 @@ public class MainView extends VBox {
 
     public void setUp() {
 
+        ChatCanvas chatCanvas = new ChatCanvas();
+        InputUser inputUser = new InputUser();
 
-
-
+        getChildren().addAll(chatCanvas, inputUser);
     }
 }
