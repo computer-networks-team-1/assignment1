@@ -43,6 +43,8 @@ public class GUIRunner {
 
     /** Stops the GUI and the threads. */
     public static void stop() {
+        if(MainView.clientConnection != null)
+            MainView.clientConnection.closeCommunication();
         Platform.exit();
     }
 
