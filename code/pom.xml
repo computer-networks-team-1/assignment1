@@ -75,14 +75,14 @@
                         <id>TCPServer</id>
                         <configuration>
                             <executable>maven</executable>
-                            <mainClass>TCPServer.TCPServer.main</mainClass>
+                            <mainClass>TCPServer.TCPServer</mainClass>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClient</id>
+                        <id>TCPClientGUI</id>
                         <configuration>
                             <executable>maven</executable>
-                            <mainClass>TCPClient.main</mainClass>
+                            <mainClass>TCPClient.GUI.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -107,7 +107,7 @@
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TCPServer.main</mainClass>
+                                    <mainClass>TCPServer.TCPServer</mainClass>
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>
@@ -126,7 +126,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClient</id>
+                        <id>TCPClientGUI</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
@@ -137,7 +137,7 @@
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TCPClient.main</mainClass>
+                                    <mainClass>TCPClient.TCPClientGUI</mainClass>
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>

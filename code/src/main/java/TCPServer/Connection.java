@@ -1,34 +1,10 @@
-import java.net.*;
+package TCPServer;
+
 import java.io.*;
+import java.net.Socket;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-public class TCPServer {
-
-    public static List<Connection> clientsConnected;
-
-    public static void main (String args[]) throws IOException, URISyntaxException {
-
-        clientsConnected = new ArrayList<Connection>();
-
-        try{
-
-            int serverPort = 7896;
-            ServerSocket listenSocket = new ServerSocket(serverPort);
-
-            while(true) { // it keeps listening for requests
-                Socket clientSocket = listenSocket.accept();  // it receives request from the client and accepts it
-                // --> handshake
-                Connection c = new Connection(clientSocket); // it establishes a connection with the client
-                clientsConnected.add(c);
-            }
-
-        } catch(IOException e) {System.out.println("Listen: " + e.getMessage());}
-    }
-}
-
-class Connection extends Thread {
+public class Connection extends Thread {
 
     DataInputStream in;
     DataOutputStream out;
@@ -45,7 +21,7 @@ class Connection extends Thread {
             this.start(); // it executes the run()
         }
         catch(IOException e)
-            {System.out.println("Connection: "+e.getMessage());}
+        {System.out.println("Connection: "+e.getMessage());}
 
     }
 
@@ -88,7 +64,7 @@ class Connection extends Thread {
             }
         }
         catch(EOFException e)
-            {System.out.println("EOF: "+e.getMessage());}
+        {System.out.println("EOF: "+e.getMessage());}
         catch(IOException e) {System.out.println("IO:s a"+e.getMessage());
         } finally {
             try {clientSocket.close(); }
