@@ -79,13 +79,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClient</id>
-                        <configuration>
-                            <executable>maven</executable>
-                            <mainClass>TCPClient.TCPClient</mainClass>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>TCPClientGUI</id>
                         <configuration>
                             <executable>maven</executable>
@@ -133,7 +126,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClient</id>
+                        <id>TCPClientGUI</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
@@ -144,7 +137,7 @@
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TCPClient.TCPClient</mainClass>
+                                    <mainClass>TCPClient.TCPClientGUI</mainClass>
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>
