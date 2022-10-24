@@ -2,6 +2,8 @@
 
 ## Run Commands
 
+E' possibile avviare il programma nel solito modo oppure con i comandi di maven, nel seguente modo:
+
 Avviare per prima cosa il server eseguendo
 
 ```
