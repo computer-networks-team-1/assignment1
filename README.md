@@ -2,8 +2,6 @@
 
 ## Run Commands
 
-E' possibile avviare il programma nel solito modo oppure con i comandi di maven, nel seguente modo:
-
 Avviare per prima cosa il server eseguendo
 
 ```
@@ -52,3 +50,16 @@ concorrenza delle classi e dei metodi, o thread).*
 
 3. *Discutere brevemente una possibile implementazione alternativa che sfrutta
 il protocollo UDP, facendo un confronto critico tra le due.*
+
+In questa applcazione l'uso del protocollo UDP è sconsigliato. Questo perchè con UDP c'è il rischio di perdere alcune informazioni e in una chat
+room perdere dati o parti di dati, come messaggi, potrebbe rendere l'applicazione inutilizzabile. Nel caso in cui la trasmissione fallisce, TCP proverà infatti ad
+inviare i dati ancora, cosa che UDP non prevede. Inoltre TCP garantisce che i dati arrivano in maniera ordinata, caratteristica necessaria per un messaggio di testo. 
+
+Uno svantaggio di TCP è che è più lento a trasmettere i dati rispetto a UDP, visto che prevede l'handshaking e il congestion control. Ma comunque per la trasmissione
+di messaggi, ritardi sono abbastanza accetabili.  
+
+Per questi motivi, la maggior parte di social networks ai giorni d'oggi utilizza il protocollo TCP. 
+Alcuni esempi: 
+- Whatsapp
+- Telegram
+- Instagram
