@@ -40,12 +40,11 @@ La documentazione completa sarà poi disponibile in target/site/apidocs/index.ht
 - [x] il server salva in un log tutto cio' che succede
 - [x] implementare broadcasting system  
 - [x] connessione e disconnessione del client devono essere comunicati
-- [ ] far chiedere insieme al nome anche l'indirizzo ip al quale connettersi (forse anche la porta?)
-- [ ] mostrare schermata di errore in caso di non riuscita alla connessione
-- [ ] fixare che /quit fa realmente chiudere il processo
+- [x] far chiedere insieme al nome anche l'indirizzo ip al quale connettersi (forse anche la porta?)
+- [x] fixare che /quit fa realmente chiudere il processo
 - [ ] documentazione (da vedere divisione)  
 - [x] GUI 
-- [ ] documentare un minimo il codice
+- [x] documentare un minimo il codice
 - [ ] emoticon
 
 ## Report:
