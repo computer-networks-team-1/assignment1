@@ -10,6 +10,9 @@ import java.util.Objects;
 
 import static TCPClient.GUI.views.MainView.clientConnection;
 
+/**
+ * It is the component that allows the user to insert messages and send them
+ */
 public class InputUser extends HBox {
 
     private final TextArea input;
@@ -29,6 +32,10 @@ public class InputUser extends HBox {
     }
 
 
+    /**
+     * Action linked to the button for sending messages
+     * @param event
+     */
     private void sendInput(ActionEvent event) {
         Objects.requireNonNull(event);
 

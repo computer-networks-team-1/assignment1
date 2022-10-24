@@ -34,7 +34,12 @@ public class GUIRunner {
 
         primaryStage.setTitle("TCPClient - Online Chat");
 
-        mainView = new MainView();
+        try {
+            mainView = new MainView();
+        } catch (IllegalStateException e) {
+            System.out.println("Closed. " + e.getMessage());
+            stop();
+        }
 
         Scene scene = new Scene(mainView, 850, 478);
         scene.getStylesheets().add("style.css");

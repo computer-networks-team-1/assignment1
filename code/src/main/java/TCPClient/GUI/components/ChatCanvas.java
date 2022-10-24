@@ -8,6 +8,9 @@ import javafx.scene.text.Text;
 
 import javax.swing.*;
 
+/**
+ * It represents the view of the user to see the chat
+ */
 public class ChatCanvas extends VBox {
 
     private TextArea chat;
@@ -28,6 +31,9 @@ public class ChatCanvas extends VBox {
         this.getChildren().add(chat);
     }
 
+    /**
+     * @return the current state of the whole chat as a string
+     */
     public String getChat() {
         return ((TextArea) this.getChildren().get(0)).getText();
     }

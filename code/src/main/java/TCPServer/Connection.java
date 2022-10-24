@@ -4,13 +4,15 @@ import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 
+/**
+ * Thread that is used per each connection
+ */
 public class Connection extends Thread {
 
     DataInputStream in;
     DataOutputStream out;
     Socket clientSocket;
     private String clientName;
-
 
     public Connection (Socket aClientSocket) {
 
@@ -25,6 +27,10 @@ public class Connection extends Thread {
 
     }
 
+    /**
+     * Checks if the client name is available and return it
+     * @return client name
+     */
     public String getClientName(){
         if (clientName == null || clientName.isEmpty())
             throw new IllegalStateException("No nickname set for: " + clientSocket.getInetAddress().toString());
@@ -33,6 +39,14 @@ public class Connection extends Thread {
 
     }
 
+    /**
+     * It broadcast a message sent by a client to the other connected clients
+     * after having called the method to save it in the log file
+     *
+     * @param ipAddress IP Address of the client who sent the message
+     * @param clientName Name of the client who sent the message
+     * @param message Message sent by the client
+     */
     private void broadCast(String ipAddress, String clientName, String message){
         recordThisMessage(ipAddress, clientName, message);
         TCPServer.clientsConnected.forEach((Connection c)-> {
@@ -44,6 +58,10 @@ public class Connection extends Thread {
         });
     }
 
+    /**
+     * It manages the connection with the client by getting its messages and checking if it has left the chat (in that
+     * case it broadcast its disconnection and removes it from the clients connected)
+     */
     public void run(){
         try {
             clientName = in.readUTF();
@@ -72,6 +90,15 @@ public class Connection extends Thread {
     }
 
 
+    /**
+     * It has the job to record every message sent on the connection between the client and the server. It therefore
+     * saves it in the file, appending the new message, this file is resources/logServer.txt  and it has everything
+     * that happened in the chat, at what time and from which ip address
+     *
+     * @param ipAddress IP Address of the client who sent the message
+     * @param clientName Name of the client who sent the message
+     * @param message Message sent by the client
+     */
     public void recordThisMessage(String ipAddress, String clientName, String message)
     {
         LocalDateTime now = LocalDateTime.now();

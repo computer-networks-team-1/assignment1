@@ -5,8 +5,15 @@ import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
-public class App extends Application {
+public class TCPClient extends Application {
 
+    /**
+     * Starts the UI process and set the possibility that when the user clicks to close the UI window, also the process
+     * stops itself
+     *
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         GUIRunner.run(primaryStage);
@@ -14,11 +21,6 @@ public class App extends Application {
         primaryStage.setOnCloseRequest(e -> GUIRunner.stop());
     }
 
-    /**
-     * Start game main loop.
-     *
-     * @param args default args.
-     */
     public static void main(String[] args) {
         launch(args);
     }
