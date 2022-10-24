@@ -44,8 +44,7 @@ successivamente è possibile trovare i jar all'interno della cartella target
 diagramma necessario, oppure in alternativa un codice sorgente ben scritto
 (struttura chiara, nomi di identificatori significativi, ecc,) e correttamente
 commentato (struttura generale, scopo delle classi e dei metodi, eventuale
-concorrenza delle classi e dei metodi, o thread).
-*
+concorrenza delle classi e dei metodi, o thread).*
 
 2. *Descrivere la progettazione dell’algoritmo, mostrando quali interazioni avvengono tra i client e il server.*
 
