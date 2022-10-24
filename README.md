@@ -22,6 +22,16 @@ mvn clean package
 
 successivamente è possibile trovare i jar all'interno della cartella target
 
+## Generating Javadoc
+
+Per generare la documentazione del progetto è necessario eseguire
+
+```
+mvn clean javadoc:javadoc
+```
+
+La documentazione completa sarà poi disponibile in target/site/apidocs/index.html
+
 ## Tasks: 
 
 - [ ] far funzionare messaggistica in LAN  
