@@ -1,5 +1,6 @@
 package TCPClient.GUI.components;
 
+import TCPClient.GUI.GUIRunner;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -32,9 +33,14 @@ public class InputUser extends HBox {
         Objects.requireNonNull(event);
 
         if(!input.getText().equals("")) {
-            clientConnection.sendMessage(input.getText());
-            input.setText("");
+            if(input.getText().equals("/quit")){
+                GUIRunner.stop(); //Triggers a disconnection message
+            } else { //Normal input
+                clientConnection.sendMessage(input.getText());
+                input.setText("");
+            }
         }
+
     }
 
 }

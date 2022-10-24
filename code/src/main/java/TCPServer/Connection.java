@@ -53,18 +53,17 @@ public class Connection extends Thread {
 
             while(true) {
                 String data = in.readUTF();
-                if (data.equals("/quit")) { //Client want's to disconnect
-                    broadCast(clientSocketIp, clientName, getClientName() + " left the chat.");
-                    clientSocket.close();
-                    TCPServer.clientsConnected.remove(this);
-                    break;
-                } else {
-                    broadCast(clientSocketIp, clientName, data);
-                }
+                broadCast(clientSocketIp, clientName, data);
             }
         }
-        catch(EOFException e)
-        {System.out.println("EOF: "+e.getMessage());}
+        catch(EOFException e) {
+            TCPServer.clientsConnected.remove(this);
+            broadCast(
+                    this.clientSocket.getInetAddress().toString(),
+                    this.getClientName(),
+                    "Has left the chat."
+            );
+        }
         catch(IOException e) {System.out.println("IO:s a"+e.getMessage());
         } finally {
             try {clientSocket.close(); }
@@ -88,9 +87,9 @@ public class Connection extends Thread {
             String fileName = "src\\main\\resources\\logServer.txt";
             File serverFile = new File(fileName);
             if (serverFile.createNewFile()) {
-                System.out.println("File created: " + serverFile.getName());
+                System.out.println("Logfile created: " + serverFile.getName());
             } else {
-                System.out.println("File already exists");
+                System.out.println("Logfile already exists");
             }
 
             FileWriter fw = new FileWriter(serverFile, true);
