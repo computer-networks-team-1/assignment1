@@ -37,3 +37,17 @@ successivamente è possibile trovare i jar all'interno della cartella target
 - [x] GUI 
 - [ ] documentare un minimo il codice
 - [ ] emoticon
+
+## Report:
+
+1. *Scrivere i requisiti di ingegneria del software per il sistema, includendo ogni
+diagramma necessario, oppure in alternativa un codice sorgente ben scritto
+(struttura chiara, nomi di identificatori significativi, ecc,) e correttamente
+commentato (struttura generale, scopo delle classi e dei metodi, eventuale
+concorrenza delle classi e dei metodi, o thread).
+*
+
+2. *Descrivere la progettazione dell’algoritmo, mostrando quali interazioni avvengono tra i client e il server.*
+
+3. *Discutere brevemente una possibile implementazione alternativa che sfrutta
+il protocollo UDP, facendo un confronto critico tra le due.*
