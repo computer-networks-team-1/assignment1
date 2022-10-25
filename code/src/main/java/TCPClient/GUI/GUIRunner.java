@@ -25,7 +25,7 @@ public class GUIRunner {
     private GUIRunner() {}
 
     /**
-     * Initializes JavaFX scene and loads fxml file.
+     * Initializes JavaFX scene
      *
      * @param primaryStage JavaFX primary stage.
      * @throws IOException when graphic.fxml is not found.

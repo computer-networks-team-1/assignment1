@@ -14,7 +14,7 @@ public class MainView extends VBox {
     public ChatCanvas chatCanvas;
 
     /**
-     * It's the component that first asks the user throught 3 dialogs the information neeeded for connecting to the
+     * It's the component that first asks the user through 3 dialogs the information neeeded for connecting to the
      * server and second calls the setup method to create the UI of the cat
      */
     public MainView() {
