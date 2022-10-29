@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.time.LocalDateTime;
 
 /**
- * Thread that is used per each connection
+ * Thread that is used for each connection
  */
 public class Connection extends Thread {
 
@@ -28,7 +28,7 @@ public class Connection extends Thread {
     }
 
     /**
-     * Checks if the client name is available and return it
+     * Checks if the client name is available and returns it
      * @return client name
      */
     public String getClientName(){
@@ -40,7 +40,7 @@ public class Connection extends Thread {
     }
 
     /**
-     * It broadcast a message sent by a client to the other connected clients
+     * It broadcasts a message sent by a client to the other connected clients
      * after having called the method to save it in the log file
      *
      * @param ipAddress IP Address of the client who sent the message
@@ -60,11 +60,11 @@ public class Connection extends Thread {
 
     /**
      * It manages the connection with the client by getting its messages and checking if it has left the chat (in that
-     * case it broadcast its disconnection and removes it from the clients connected)
+     * case it broadcasts its disconnection and removes it from the clients connected)
      */
     public void run(){
         try {
-            clientName = in.readUTF();
+            clientName = in.readUTF(); //First message of the client is its name
 
             String clientSocketIp = clientSocket.getInetAddress().toString();
             broadCast(clientSocketIp, clientName, "Hey there, I joined the chat.");
@@ -74,7 +74,7 @@ public class Connection extends Thread {
                 broadCast(clientSocketIp, clientName, data);
             }
         }
-        catch(EOFException e) {
+        catch(EOFException e) { //Client has disconnected. Either closed window or typed /quit message
             TCPServer.clientsConnected.remove(this);
             broadCast(
                     this.clientSocket.getInetAddress().toString(),
@@ -85,7 +85,10 @@ public class Connection extends Thread {
         catch(IOException e) {System.out.println("IO:s a"+e.getMessage());
         } finally {
             try {clientSocket.close(); }
-            catch (IOException e) {/*close failed*/}
+            catch (IOException e) {
+                /*close failed*/
+                e.printStackTrace();
+            }
         }
     }
 

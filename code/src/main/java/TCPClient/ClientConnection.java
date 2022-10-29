@@ -27,31 +27,14 @@ public class ClientConnection {
      * @param ipServer ip of the server, the user wants to connect to
      * @param portServer port of the server, the user wants to connect to
      */
-    public ClientConnection(String clientName, String ipServer, int portServer) {
+    public ClientConnection(String clientName, String ipServer, int portServer) throws IOException {
 
-        s = null;
+        s = new Socket(ipServer, portServer);
 
-        String host = ipServer;
+        in = new DataInputStream(s.getInputStream()); //inward connection
+        out = new DataOutputStream( s.getOutputStream()); //outward connection
 
-        try{
-            int serverPort = portServer;
-
-            s = new Socket(host, serverPort);
-
-            in = new DataInputStream(s.getInputStream()); //inward connection
-            out = new DataOutputStream( s.getOutputStream()); //outward connection
-
-            out.writeUTF(clientName); //First message is clients name
-
-        } catch (UnknownHostException e){
-            System.out.println("Sock: "+e.getMessage());
-        } catch (EOFException e){
-            System.out.println("EOF: "+e.getMessage());
-        } catch (IOException e){
-            System.out.println("IO: "+e.getMessage());
-        }
-
-
+        out.writeUTF(clientName); //First message is clients name
     }
 
     /**
